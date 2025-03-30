@@ -8,8 +8,10 @@
 
 Diff::Diff(std::unique_ptr<Tokenizer> tokenizer,
     const std::string& text1,
-    const std::string& text2)
-    : tokenizer_(std::move(tokenizer)) {
+    const std::string& text2,
+    const std::string oldName,
+    const std::string newName)
+    : tokenizer_(std::move(tokenizer)), oldName_(oldName), newName_(newName) {
 
     from_tokens_ = tokenizer_->Encode(text1);
     /* Token Check
@@ -165,8 +167,8 @@ std::string Diff::GetDiff(DiffFormat format) {
     }
 
     std::stringstream diff;
-    diff << "--- a\n";
-    diff << "+++ b\n";
+    diff << "--- " << oldName_ << "\n";
+    diff << "+++ " << newName_ << "\n";
     for (const Hunk& hunk : hunks) {
         diff << "@@ -" << hunk.f_start << "," << hunk.f_count << " +" << hunk.t_start << "," << hunk.t_count << " @@\n";
         for (const std::string& line : hunk.lines) {

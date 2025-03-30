@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
     // Create Tokenizer
     auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
 
-    Diff diff(std::move(tokenizer), text1, text2);
+    Diff diff(std::move(tokenizer), text1, text2, oldFileName, newFileName);
 
     if (diff.Identical()) {
         std::cout << "Texts are identical" << std::endl;

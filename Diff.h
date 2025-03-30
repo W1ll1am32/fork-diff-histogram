@@ -28,7 +28,9 @@ public:
 
     Diff(std::unique_ptr<Tokenizer> tokenizer,
         const std::string& text1,
-        const std::string& text2);
+        const std::string& text2,
+        const std::string oldName,
+        const std::string newName);
 
     std::vector<TokenId> LCS(DiffFormat format);
     std::string GetDiff(DiffFormat format = DiffFormat::HISTOGRAM);
@@ -43,4 +45,6 @@ private:
 
     std::vector<TokenId> from_tokens_;
     std::vector<TokenId> to_tokens_;
+    std::string oldName_;
+    std::string newName_;
 };
