@@ -191,38 +191,3 @@ bool Diff::Identical() const {
 
     return true;
 }
-
-/*
-// Function to compute the diff
-void outputUnifiedDiff(const vector<pair<char, string>>& diff, const string& file1, const string& file2) {
-    cout << "--- " << file1 << endl;
-    cout << "+++ " << file2 << endl;
-
-    int hunkStart = 1, count1 = 0, count2 = 0;
-    vector<string> hunkLines;
-
-    for (const auto& [type, token] : diff) {
-        if (type == ' ') {
-            if (!hunkLines.empty()) {
-                cout << "@@ -" << hunkStart << "," << count1 << " +" << hunkStart << "," << count2 << " @@" << endl;
-                for (const string& line : hunkLines) {
-                    cout << line << endl;
-                }
-                hunkLines.clear();
-            }
-            hunkStart++;
-        }
-        else {
-            hunkLines.push_back(string(1, type) + token);
-            if (type == '-') count1++;
-            if (type == '+') count2++;
-        }
-    }
-    if (!hunkLines.empty()) {
-        cout << "@@ -" << hunkStart << "," << count1 << " +" << hunkStart << "," << count2 << " @@" << endl;
-        for (const string& line : hunkLines) {
-            cout << line << endl;
-        }
-    }
-}
-*/
