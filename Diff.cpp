@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <sstream>
+#include <climits>
 
 Diff::Diff(std::unique_ptr<Tokenizer> tokenizer,
     const std::string& text1,
