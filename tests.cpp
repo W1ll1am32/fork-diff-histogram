@@ -68,8 +68,8 @@ TEST_CASE("Diff tests", "[diff]") {
         std::string text1 = "This is a test";
         std::string text2 = "This is a test";
         
-        auto tokenizer = CreateTokenizer(UniversalTokenizerMode::WORD);
-        MyersDiff diff(std::move(tokenizer), text1, text2);
+        auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
+        Diff diff(std::move(tokenizer), text1, text2);
         
         REQUIRE(diff.AreTextsIdentical() == true);
     }
@@ -78,8 +78,8 @@ TEST_CASE("Diff tests", "[diff]") {
         std::string text1 = "This is test";
         std::string text2 = "This is a test";
         
-        auto tokenizer = CreateTokenizer(UniversalTokenizerMode::WORD);
-        MyersDiff diff(std::move(tokenizer), text1, text2);
+        auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
+        Diff diff(std::move(tokenizer), text1, text2);
         
         REQUIRE(diff.AreTextsIdentical() == false);
     }
@@ -88,8 +88,8 @@ TEST_CASE("Diff tests", "[diff]") {
         std::string text1 = "This is a test";
         std::string text2 = "This is test";
         
-        auto tokenizer = CreateTokenizer(UniversalTokenizerMode::WORD);
-        MyersDiff diff(std::move(tokenizer), text1, text2);
+        auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
+        Diff diff(std::move(tokenizer), text1, text2);
         
         REQUIRE(diff.AreTextsIdentical() == false);
     }
@@ -98,8 +98,8 @@ TEST_CASE("Diff tests", "[diff]") {
         std::string text1 = "This is a test";
         std::string text2 = "This is the test";
         
-        auto tokenizer = CreateTokenizer(UniversalTokenizerMode::WORD);
-        MyersDiff diff(std::move(tokenizer), text1, text2);
+        auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
+        Diff diff(std::move(tokenizer), text1, text2);
         
         REQUIRE(diff.AreTextsIdentical() == false);
     }
@@ -109,7 +109,7 @@ TEST_CASE("Diff tests", "[diff]") {
         std::string text2 = "This is a test";
         
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
-        MyersDiff diff(std::move(tokenizer), text1, text2);
+        Diff diff(std::move(tokenizer), text1, text2);
         
         REQUIRE(diff.AreTextsIdentical() == false);
     }
@@ -120,8 +120,8 @@ TEST_CASE("Diff format output tests", "[diff][format]") {
     std::string text1 = "line1\nline2\nline3\n";
     std::string text2 = "line1\nmodified line\nline3\n";
     
-    auto tokenizer = CreateTokenizer(UniversalTokenizerMode::WORD);
-    MyersDiff diff(std::move(tokenizer), text1, text2);
+    auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
+    Diff diff(std::move(tokenizer), text1, text2);
     
     SECTION("Unified format") {
         std::string unified_diff = diff.GetDiff(DiffFormat::HISTOGRAM);
@@ -160,7 +160,7 @@ TEST_CASE("File comparison integration tests", "[integration]") {
     REQUIRE_FALSE(text2.empty());
     
     auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
-    MyersDiff diff(std::move(tokenizer), text1, text2);
+    Diff diff(std::move(tokenizer), text1, text2);
     
     REQUIRE_FALSE(diff.AreTextsIdentical());
     
