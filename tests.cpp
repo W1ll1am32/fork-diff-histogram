@@ -71,7 +71,7 @@ TEST_CASE("Diff tests", "[diff]") {
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
         Diff diff(std::move(tokenizer), text1, text2);
         
-        REQUIRE(diff.AreTextsIdentical() == true);
+        REQUIRE(diff.Identical() == true);
     }
     
     SECTION("Simple insertion") {
@@ -81,7 +81,7 @@ TEST_CASE("Diff tests", "[diff]") {
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
         Diff diff(std::move(tokenizer), text1, text2);
         
-        REQUIRE(diff.AreTextsIdentical() == false);
+        REQUIRE(diff.Identical() == false);
     }
     
     SECTION("Simple deletion") {
@@ -91,7 +91,7 @@ TEST_CASE("Diff tests", "[diff]") {
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
         Diff diff(std::move(tokenizer), text1, text2);
         
-        REQUIRE(diff.AreTextsIdentical() == false);
+        REQUIRE(diff.Identical() == false);
     }
     
     SECTION("Simple substitution") {
@@ -101,7 +101,7 @@ TEST_CASE("Diff tests", "[diff]") {
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
         Diff diff(std::move(tokenizer), text1, text2);
         
-        REQUIRE(diff.AreTextsIdentical() == false);
+        REQUIRE(diff.Identical() == false);
     }
     
     SECTION("Empty text handling") {
@@ -111,7 +111,7 @@ TEST_CASE("Diff tests", "[diff]") {
         auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
         Diff diff(std::move(tokenizer), text1, text2);
         
-        REQUIRE(diff.AreTextsIdentical() == false);
+        REQUIRE(diff.Identical() == false);
     }
 
 }
@@ -162,7 +162,7 @@ TEST_CASE("File comparison integration tests", "[integration]") {
     auto tokenizer = CreateTokenizer(TokenizerMode::WORD);
     Diff diff(std::move(tokenizer), text1, text2);
     
-    REQUIRE_FALSE(diff.AreTextsIdentical());
+    REQUIRE_FALSE(diff.Identical());
     
     std::string unified_diff = diff.GetDiff(DiffFormat::HISTOGRAM);
     REQUIRE(unified_diff.find("modified") != std::string::npos);
